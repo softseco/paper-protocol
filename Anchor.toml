@@ -1,0 +1,19 @@
+[toolchain]
+anchor_version = "0.31.0"
+
+[features]
+resolution = true
+skip-lint = false
+
+[programs.localnet]
+paper_protocol = "81TNSWJQupZvs5Ga1R2Xrizh9Yu87uBbonzQeqk9t3xz"
+
+[registry]
+url = "https://api.apr.dev"
+
+[provider]
+cluster = "Localnet"
+wallet = "~/.config/solana/id.json"
+
+[scripts]
+test = "npx mocha --import=tsx -t 1000000 tests/**/*.ts"
