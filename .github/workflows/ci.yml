@@ -47,6 +47,13 @@ jobs:
       - name: Generate local keypair
         run: solana-keygen new --no-bip39-passphrase --force
 
+      - name: Pin dependencies for Solana bundled Rust
+        run: |
+          cargo update blake3 --precise 1.5.5 || true
+          cargo update bytemuck_derive --precise 1.8.1 || true
+          cargo update indexmap --precise 2.11.0 || true
+          cargo update solana-program --precise 2.1.0 || true
+
       - name: Build
         run: anchor build
 
