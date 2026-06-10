@@ -9,12 +9,13 @@ on:
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
       - name: Install Rust
-        uses: dtolnay/rust-toolchain@1.95.0
+        uses: dtolnay/rust-toolchain@stable
 
       - name: Cache cargo
         uses: actions/cache@v4
@@ -27,14 +28,21 @@ jobs:
 
       - name: Install Solana CLI
         run: |
-          sh -c "$(curl -sSfL https://release.anza.xyz/v2.1.0/install)"
+          sh -c "$(curl -sSfL https://release.anza.xyz/v2.2.12/install)"
           echo "$HOME/.local/share/solana/install/active_release/bin" >> $GITHUB_PATH
+
+      - name: Verify versions
+        run: |
+          rustc --version
+          cargo --version
+          solana --version
 
       - name: Install Anchor
         run: |
           cargo install --git https://github.com/coral-xyz/anchor avm --force
           avm install 0.31.0
           avm use 0.31.0
+          anchor --version
 
       - name: Setup Node 20
         uses: actions/setup-node@v4
@@ -45,16 +53,11 @@ jobs:
         run: npm install
 
       - name: Generate local keypair
-        run: solana-keygen new --no-bip39-passphrase --force
-
-      - name: Pin dependencies for Solana bundled Rust
         run: |
-          cargo update blake3 --precise 1.5.5 || true
-          cargo update bytemuck_derive --precise 1.8.1 || true
-          cargo update indexmap --precise 2.11.0 || true
-          cargo update toml_parser --precise 1.0.1 || true
-          cargo update toml_edit --precise 0.22.20 || true
-          cargo update toml_datetime --precise 0.6.8 || true
+          solana-keygen new \
+            --no-bip39-passphrase \
+            --force \
+            -o ~/.config/solana/id.json
 
       - name: Build
         run: anchor build
