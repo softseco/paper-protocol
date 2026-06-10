@@ -36,13 +36,13 @@ jobs:
           avm install 0.31.0
           avm use 0.31.0
 
-      - name: Setup Node
+      - name: Setup Node 20
         uses: actions/setup-node@v4
         with:
-          node-version: "18"
+          node-version: "20"
 
       - name: Install dependencies
-        run: yarn install
+        run: npm install
 
       - name: Generate local keypair
         run: solana-keygen new --no-bip39-passphrase --force
