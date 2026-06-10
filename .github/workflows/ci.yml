@@ -52,7 +52,9 @@ jobs:
           cargo update blake3 --precise 1.5.5 || true
           cargo update bytemuck_derive --precise 1.8.1 || true
           cargo update indexmap --precise 2.11.0 || true
-          cargo update solana-program --precise 2.1.0 || true
+          cargo update toml_parser --precise 1.0.1 || true
+          cargo update toml_edit --precise 0.22.20 || true
+          cargo update toml_datetime --precise 0.6.8 || true
 
       - name: Build
         run: anchor build
