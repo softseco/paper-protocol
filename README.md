@@ -32,7 +32,7 @@ These layers are specified in the Technical Specification and are the subject of
 
 ## Architecture overview
 
-PAPER eUSD by Softseco is backed 1:1 by a reserve held in a documented allocation:
+eUSD by Softseco is backed 1:1 by a reserve held in a documented allocation:
 
 | Tranche | Share | Instruments |
 |---|---|---|
@@ -106,7 +106,7 @@ paper_protocol/
 
 - **Whitepaper** — full protocol, economic model, compliance framework
 - **Technical Specification** — engineering-grade detail (available on request)
-- **Website** — [project site]
+- **Website** — https://softseco.com/
 
 ---
 
